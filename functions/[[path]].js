@@ -19,22 +19,14 @@ const BLOCKER = `
 export async function onRequest(context) {
     const requestUrl = new URL(context.request.url);
 
-    const targetPath =
-        requestUrl.pathname === "/"
-            ? "/ytGl5oc/"
-            : requestUrl.pathname;
-
     const targetUrl =
-        ORIGIN + targetPath + requestUrl.search;
+        ORIGIN +
+        requestUrl.pathname +
+        requestUrl.search;
 
     const response = await fetch(targetUrl, {
         method: context.request.method,
         headers: context.request.headers,
-        body:
-            context.request.method === "GET" ||
-            context.request.method === "HEAD"
-                ? undefined
-                : context.request.body,
         redirect: "manual"
     });
 
